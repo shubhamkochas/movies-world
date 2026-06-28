@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getBackdropUrl, getPosterUrl } from '../config';
-import { getTrailerKey } from '../api';
+import { getVideos, getTrailerKey } from '../api';
 import { useUser } from '../context/UserContext';
 import TrailerModal from './TrailerModal';
 
@@ -31,10 +31,7 @@ const HeroBanner = ({ movies }) => {
   const handlePlayTrailer = async () => {
     if (!movie) return;
     try {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=5019346c15f827a11da3db854275a088&language=en-US`
-      );
-      const data = await res.json();
+      const data = await getVideos(movie.id, 'movie');
       const key = getTrailerKey(data);
       if (key) {
         setTrailerKey(key);

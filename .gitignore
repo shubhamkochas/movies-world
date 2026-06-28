@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables — NEVER commit real keys
+.env
+.env.local
+.env.*.local
+# Safe to commit (template only, no real values)
+!.env.example
